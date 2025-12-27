@@ -1,0 +1,12 @@
+# تنظیمات دیتابیس
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASS=
+DB_NAME=books-shop
+
+# پورت بک‌اند
+PORT=3001
+
+# URL برای فرانت
+API_URL=http://localhost:3001

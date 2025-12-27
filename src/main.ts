@@ -3,6 +3,9 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import * as passport from 'passport';
 import session from 'express-session';
+import { config } from 'dotenv';
+
+config();
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
@@ -12,21 +15,21 @@ async function bootstrap() {
       resave: false,
       saveUninitialized: false,
       cookie: {
-        maxAge: 1000 * 60 * 60 * 5, 
+        maxAge: 1000 * 60 * 60 * 5,
         httpOnly: true,
       },
     }),
   );
 
-  
+
 
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
   });
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
-  await app.listen(3001);
+  const port = process.env.PORT || 3001;
+  await app.listen(port);
 }
 bootstrap();
